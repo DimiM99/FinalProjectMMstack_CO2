@@ -9,8 +9,7 @@ function App() {
     const user = useUserStore(state => {
         return {walletId: state.walletId, accessToken: state.accessToken, refreshToken: state.refreshToken}
     })
-    const setUser = useUserStore(state => state.setUser)
-    const setUsername = useUserStore(state => state.setUsername)
+    const {setUser,setUsername} = useUserStore()
 
     const [walletId, setWalletId] = useState(null)
     useEffect( ()=>{
@@ -23,7 +22,6 @@ function App() {
                 .catch(e=>console.log(e))
         }
     },[walletId])
-    console.log(user)
   return (
     <div className="App">
         {user.walletId  ? (
