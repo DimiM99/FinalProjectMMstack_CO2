@@ -1,65 +1,46 @@
 import React, { useEffect, useState } from "react";
+import isMobileDevice from "../utils/isMobileDevice";
 
-function isMobileDevice() {
-    return 'ontouchstart' in window || 'onmsgesturechange' in window;
-}
+export default function Login({ setUserAddress, setRefreshToken, setAccessToken}) {
 
-async function connect(onConnected) {
-    if (!window.ethereum) {
-        alert("Get MetaMask!");
-        return;
-    }
 
-    const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
-    });
-
-    onConnected(accounts[0]);
-}
-
-async function checkIfWalletIsConnected(onConnected) {
-    if (window.ethereum) {
-        const accounts = await window.ethereum.request({
-            method: "eth_accounts",
-        });
-
-        if (accounts.length > 0) {
-            const account = accounts[0];
-            onConnected(account);
+    async function connect(onConnected) {
+        if (!window.ethereum) {
+            alert("Get MetaMask!");
             return;
         }
 
-        if (isMobileDevice()) {
-            await connect(onConnected);
+        const accounts = await window.ethereum.request({
+            method: "eth_requestAccounts",
+        });
+
+        onConnected(accounts[0]);
+    }
+
+    async function checkIfWalletIsConnected(onConnected) {
+        if (window.ethereum) {
+            const accounts = await window.ethereum.request({
+                method: "eth_accounts",
+            });
+
+            if (accounts.length > 0) {
+                const account = accounts[0];
+                onConnected(account);
+                return;
+            }
+
+            if (isMobileDevice()) {
+                await connect(onConnected);
+            }
         }
     }
-}
-
-
-export default function Login({ onAddressChanged = (props)=> console.log(props) }) {
-    const [userAddress, setUserAddress] = useState("");
 
     useEffect(() => {
         checkIfWalletIsConnected(setUserAddress);
     }, []);
 
-    // useEffect(() => {
-    //     onAddressChanged(userAddress);
-    // }, [userAddress]);
-
-    return userAddress ? (
-        <div>
-            Connected with <Address userAddress={userAddress} />
-        </div>
-    ) : (
-        <Connect setUserAddress={setUserAddress}/>
-    );
-}
-
-
-function Connect({ setUserAddress }) {
-    if (isMobileDevice()) {
-        const dappUrl = "http://localhost:3000"; // TODO enter your dapp URL. For example: https://uniswap.exchange. (don't enter the "https://")
+    if ('ontouchstart' in window || 'onmsgesturechange' in window) {
+        const dappUrl = "http://localhost:3000";
         const metamaskAppDeepLink = "https://metamask.app.link/dapp/" + dappUrl;
         return (
             <a href={metamaskAppDeepLink}>
@@ -69,8 +50,6 @@ function Connect({ setUserAddress }) {
             </a>
         );
     }
-
-
     return (
         <button onClick={() => connect(setUserAddress)}>
             Connect to MetaMask
@@ -79,8 +58,3 @@ function Connect({ setUserAddress }) {
 }
 
 
-function Address({ userAddress }) {
-    return (
-        <span>{userAddress.substring(0, 5)}…{userAddress.substring(userAddress.length - 4)}</span>
-    );
-}
