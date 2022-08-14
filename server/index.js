@@ -25,9 +25,9 @@ app.post("/login", async (req,res)=>{
 	const {walletId} = req.body
 	if(!req.body) return
 	try {
-		const temp = await User.findOne({walletId: req.body.walletId})
+		const temp = await User.findOne({walletId: walletId})
 		if ( temp == null ) {
-			await User.create({walletId: req.body.walletId})
+			await User.create({walletId: walletId})
 		} else {
 			console.log("already registeresd")
 		}
