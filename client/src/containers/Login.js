@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import isMobileDevice from "../utils/isMobileDevice";
+import {Box, Button} from "@mui/material";
+import "../styles/Login.css"
+import MetamaskLogo from "../components/MetamaskLogo";
+import MetamaskStaticLogo from "../Assets/MetamaskStaticLogo";
 
-export default function Login({ setUserAddress, setRefreshToken, setAccessToken}) {
-
-
+export default function Login({ setWalletId }) {
     async function connect(onConnected) {
         if (!window.ethereum) {
             alert("Get MetaMask!");
@@ -36,7 +38,7 @@ export default function Login({ setUserAddress, setRefreshToken, setAccessToken}
     }
 
     useEffect(() => {
-        checkIfWalletIsConnected(setUserAddress);
+        checkIfWalletIsConnected(setWalletId);
     }, []);
 
     if ('ontouchstart' in window || 'onmsgesturechange' in window) {
@@ -51,10 +53,17 @@ export default function Login({ setUserAddress, setRefreshToken, setAccessToken}
         );
     }
     return (
-        <button onClick={() => connect(setUserAddress)}>
-            Connect to MetaMask
-        </button>
+        <Box sx={{height: "100%",display : 'flex', justifyContent: "center", alignItems: "center", flexDirection: "column"}}>
+            <div id={"container-id"}>
+              <MetamaskStaticLogo/>
+            </div>
+            <Button size={"large"} onClick={() => connect(setWalletId)}>
+                Connect to MetaMask
+            </Button>
+
+        </Box>
     );
 }
+
 
 
