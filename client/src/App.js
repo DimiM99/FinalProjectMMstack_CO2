@@ -10,12 +10,17 @@ function App() {
         return {walletId: state.walletId, accessToken: state.accessToken, refreshToken: state.refreshToken}
     })
     const setUser = useUserStore(state => state.setUser)
+    const setUsername = useUserStore(state => state.setUsername)
 
     const [walletId, setWalletId] = useState(null)
-
     useEffect( ()=>{
         if(walletId){
             login(walletId, setUser)
+                .then(({accessToken,refreshToken, username}) => {
+                    setUser(walletId,  refreshToken, accessToken)
+                    setUsername(username)
+                })
+                .catch(e=>console.log(e))
         }
     },[walletId])
     console.log(user)

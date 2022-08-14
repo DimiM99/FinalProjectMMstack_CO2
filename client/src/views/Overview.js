@@ -3,17 +3,14 @@ import AppBar from "../components/AppBar"
 import Box from "@mui/material/Box";
 import SideBar from "../components/SideBar"
 import { Routes, Route } from "react-router-dom"
+import Settings from "../components/Settings";
 
 function ListOverview() {
     return "ListOverview";
 }
-function Settings() {
-    return "Settings";
-}
-
 const Overview = () => {
     return (
-        <Box sx={{background: "aliceblue", height: "100%"}}>
+        <Box sx={{height: "100%"}}>
             <AppBar/>
             <SideBar/>
             <Box sx={{ position: "absolute", height: "calc(100% - 108px)", width: "calc(100% - 240px)", left: 240, top: 108}}>

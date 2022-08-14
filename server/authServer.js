@@ -9,7 +9,7 @@ app.use(express.json())
 app.use(cors())
 
 const generateAccessToken = user => {
-    return jwt.sign(user, process.env.ACCESS_TOKEN_HASH, {expiresIn: "15m"})
+    return jwt.sign(user, process.env.ACCESS_TOKEN_HASH)
 }
 //todo export to database
 let refreshTokens = []
@@ -38,6 +38,7 @@ app.post('/login', (req,res)=>{
     const accessToken = generateAccessToken(user)
     const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_HASH)
     refreshTokens.push(refreshToken)
+    console.log({accessToken, refreshToken})
     res.json({accessToken, refreshToken})
 })
 

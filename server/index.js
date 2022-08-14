@@ -38,7 +38,6 @@ app.post("/login", async (req,res)=>{
 	// res.send()
 })
 app.get("/getsimpledata", authenticateToken, async (req,res)=>{
-	console.log("cakked")
 	const {walletId, accessToken, refreshToken} = req.body
 	if(!req.body) return
 	try {
@@ -47,20 +46,28 @@ app.get("/getsimpledata", authenticateToken, async (req,res)=>{
 	}catch (e) {
 		console.log(e.message)
 	}
-	// res.send()
 })
-
-//Testing queries
-// async function run() {
-// 	try{
-// 		const user = await User.find({name: "Kylo"})
-// 		console.log(user)
-//
-// 	} catch (e) {
-// 		console.log(e.message)
-// 	}
-// }
-// run()
+app.get("/user", authenticateToken, async (req,res)=>{
+	const {walletId} = req.user
+	if(!req.body) return
+	try {
+		const response = await User.findOne({walletId: walletId})
+		res.json(response)
+	}catch (e) {
+		console.log(e.message)
+	}
+})
+app.post("/updateusername", authenticateToken,  async (req,res)=>{
+	console.log('wtf', req.headers['authorization'])
+	const {walletId, newUsername} = req.body
+	if(!req.body) return
+	try {
+		await User.updateOne({walletId}, {username: newUsername})
+		res.sendStatus(200)
+	}catch (e) {
+		console.log(e.message)
+	}
+})
 
 app.listen(process.env.INDEX_PORT, function() {
 	console.log("Server is running on Port: " + process.env.INDEX_PORT);
