@@ -1,8 +1,6 @@
-import { Routes, Route } from "react-router-dom"
 import Login from "./containers/Login";
-import Layout from "./containers/Layout";
 import {useEffect, useState} from "react";
-import { login, getData } from "./apis/auth"
+import { login } from "./apis/auth"
 import useUserStore from "./store/user";
 import Overview from "./views/Overview";
 
@@ -24,14 +22,7 @@ function App() {
   return (
     <div className="App">
         {user.walletId  ? (
-            // <div>
-            //    <button onClick={() => getData(walletId, user.accessToken, user.refreshToken)}>get Data</button>
-            // </div>
             <Overview/>
-          // <Routes>
-          //   <Route path="/" element={ <h1>Home</h1> } />
-          //   <Route path="/xxxx" element={ <h1>XXXX</h1> } />
-          // </Routes>
         ): (
             <Login setWalletId={setWalletId}/>
         )}
