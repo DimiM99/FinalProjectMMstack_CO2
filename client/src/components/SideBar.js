@@ -13,6 +13,9 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import UserInfo from "./UserInfo";
+import TasksProgress from "./TasksProgress";
+import UserActions from "./UserActions";
 
 const drawerWidth = 240;
 
@@ -28,18 +31,11 @@ export default function PermanentDrawerLeft() {
             }}
         >
             <Box sx={{ overflow: 'auto' }}>
-                <List>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                        <ListItem key={text} disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                                </ListItemIcon>
-                                <ListItemText primary={text} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
+                <Box sx={{ padding: '30px', display: 'flex', alignItems: "center", flexDirection: 'column'}}>
+                    <UserInfo/>
+                    <UserActions/>
+                    <TasksProgress/>
+                </Box>
                 <Divider />
                 <List>
                     {['All mail', 'Trash', 'Spam'].map((text, index) => (
