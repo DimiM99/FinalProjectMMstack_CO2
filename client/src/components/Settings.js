@@ -23,7 +23,7 @@ const Settings = () => {
         }
     }
     return (
-        <Box sx={{height: "100%"}}>
+        <Box sx={{height: "100%", maxWidth: '500px' ,display: 'flex', flexDirection: 'column', padding: '20px'}}>
             <Typography variant="h4" gutterBottom component="div">{!!username ? username : "You did not set a Username"}</Typography>
             <TextField
                 onChange={handleChange}
@@ -32,7 +32,7 @@ const Settings = () => {
                 variant="standard"
                 value={newUsername}
             />
-            <Button disabled={!newUsername} onClick={onSubmit}>Submit your username</Button>
+            <Button width={'200px'} variant={"contained"} disabled={!newUsername} onClick={onSubmit}>Submit your username</Button>
         </Box>
     );
 };
