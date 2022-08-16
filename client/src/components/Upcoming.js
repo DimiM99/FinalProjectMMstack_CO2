@@ -32,12 +32,12 @@ const Upcoming = () => {
   return (
     <Box display="flex" alignItems="center" flexDirection="column">
         <Typography sx={{mt: 1, marginBottom: '10px'}} variant="h6">Upcoming</Typography>
-        <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+        <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', justifyContent: 'space-between'}}>
       {[0, 1, 2, 3].map((value) => {
         const labelId = `checkbox-list-label-${value}`;
 
         return (
-          <ListItem sx={{}}
+          <ListItem
             key={value}
             secondaryAction={
               <IconButton edge="end" aria-label="FileOpenIcon">
@@ -47,14 +47,13 @@ const Upcoming = () => {
             disablePadding
           >
             <ListItemButton role={undefined} onClick={handleToggle(value)} dense>
-              <ListItemIcon>
+              <ListItemIcon sx={{minWidth: '0px'}}>
                 <Checkbox
                   edge="start"
                   checked={checked.indexOf(value) !== -1}
                   tabIndex={-1}
                   disableRipple
                   inputProps={{ 'aria-labelledby': labelId }}
-                  
                 />
               </ListItemIcon>
               <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
