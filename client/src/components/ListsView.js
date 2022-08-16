@@ -17,7 +17,6 @@ export default function ListsView() {
     return (
         <Box sx={{ width: '100%', maxWidth: 300, bgcolor: 'background.paper' }}>
             <List component="nav" aria-label="main mailbox folders">
-                {/*example of a list item with a button*/}
                 <ListItemButton
                     selected={selectedIndex === 3}
                     onClick={(event) => handleListItemClick(event, 3)}

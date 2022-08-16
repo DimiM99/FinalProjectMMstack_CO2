@@ -27,7 +27,7 @@ export default function PermanentDrawerLeft() {
                     <TasksProgress/>
                 </Box>
                 <Divider />
-                <Box sx={{ padding: '30px', display: 'flex', alignItems: "center", flexDirection: 'column'}}>
+                <Box sx={{ display: 'flex', alignItems: "center", flexDirection: 'column', width: '100%'}}>
                     <Upcoming/>
                 </Box>
             </Box>

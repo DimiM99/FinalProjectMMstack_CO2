@@ -43,9 +43,10 @@ const Upcoming = () => {
               </IconButton>
             }
             disablePadding
+            sx={{width: '100%'}}
           >
-            <ListItemButton role={undefined} onClick={handleToggle(value)} dense>
-              <ListItemIcon sx={{minWidth: '0px'}}>
+            <ListItemButton onClick={handleToggle(value)} dense>
+              <ListItemIcon sx={{margin: 0}}>
                 <Checkbox
                   edge="start"
                   checked={checked.indexOf(value) !== -1}
