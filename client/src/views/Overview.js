@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import SideBar from "../components/SideBar"
 import { Routes, Route } from "react-router-dom"
 import Settings from "../components/Settings";
+import MainView from "./MainView";
 
 function ListOverview() {
     return "ListOverview";
@@ -15,7 +16,7 @@ const Overview = () => {
             <SideBar/>
             <Box sx={{ position: "absolute", height: "calc(100% - 108px)", width: "calc(100% - 240px)", left: 240, top: 108}}>
                 <Routes>
-                   <Route path="/" element={ <ListOverview/> } />
+                   <Route path="/" element={ <MainView/> } />
                    <Route path="/settings" element={ <Settings/> } />
                 </Routes>
             </Box>
