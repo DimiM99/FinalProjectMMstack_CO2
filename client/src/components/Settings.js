@@ -19,7 +19,7 @@ const Settings = () => {
                     console.log("username successfully updated")
                     setUsername(newUsername)
                 }
-            }).catch(e=> console.log(e))
+            }).catch(e=> console.log(e.response.statusText))
         }
     }
     return (
