@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from "react";
 import isMobileDevice from "../utils/isMobileDevice";
 import {Box, Button} from "@mui/material";
 import "../styles/Login.css"
-import MetamaskLogo from "../components/MetamaskLogo";
 import MetamaskStaticLogo from "../Assets/MetamaskStaticLogo";
 
 export default function Login({ setWalletId }) {
