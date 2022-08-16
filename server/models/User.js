@@ -10,8 +10,16 @@ const userSchema = new Schema({
 			uncompleted: Number,
 			total:Number
 		},
-		lists: [Object]
-	},
-	refreshTokens: [String]
+		lists: [{
+			id: Number,
+			name: String,
+			color: String,
+			data: [{
+				taskHeading: String,
+				status: Boolean,
+				expirationTimestamp: Number
+			}]
+		}]
+	}
 });
 module.exports = mongoose.model("User", userSchema);
