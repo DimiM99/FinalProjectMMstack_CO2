@@ -37,15 +37,28 @@ app.post("/login", async (req,res)=>{
 	}
 	// res.send()
 })
-app.get("/getsimpledata", authenticateToken, async (req,res)=>{
-	const {walletId, accessToken, refreshToken} = req.body
-	if(!req.body) return
+app.get("/getsimpledata",  async (req,res)=>{
+	// const {walletId, accessToken, refreshToken} = req.body
+	if(req.body.n=="cool") res.send(new Error())
+	console.log(req.body)
 	try {
+
 		const temp = await User.find({})
 		res.json(temp)
 	}catch (e) {
-		console.log(e.message)
+		res.send(e)
 	}
+})
+app.get("/users",  async (req,res)=>{
+	// const {walletId, accessToken, refreshToken} = req.body
+	// if(!req.body) return
+	// try {
+	// 	const temp = await User.find({})
+	console.log("users")
+		res.json("users")
+	// }catch (e) {
+	// 	console.log(e.message)
+	// }
 })
 app.get("/user", authenticateToken, async (req,res)=>{
 	const {walletId} = req.user

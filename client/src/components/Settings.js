@@ -5,7 +5,7 @@ import {Typography, TextField, Button} from "@mui/material";
 import {updateUsername} from "../apis/api";
 
 const Settings = () => {
-    const {username, accessToken, walletId, setUsername} = useUserStore()
+    const {username, accessToken, walletId, setUsername, updateAccessToken, refreshToken} = useUserStore()
 
     const [newUsername, setNewUsername] = useState("")
 
@@ -19,7 +19,20 @@ const Settings = () => {
                     console.log("username successfully updated")
                     setUsername(newUsername)
                 }
-            }).catch(e=> console.log(e.response.statusText))
+            }).catch(e=> {
+                if (e.response.statusText === "token_expired"){
+                    console.log("token expired")
+                    updateAccessToken(refreshToken)
+                    onSubmit()
+                    // console.log("expired")
+                    // updateUsername(walletId,accessToken, newUsername).then(res=>{
+                    //     if(res === 200){
+                    //         console.log("username successfully updated")
+                    //         setUsername(newUsername)
+                    //     }
+                    // }).catch(e=> console.log(e))
+                }
+            })
         }
     }
     return (

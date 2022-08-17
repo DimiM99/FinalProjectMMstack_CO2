@@ -6,7 +6,13 @@ const authenticateToken = (req,res,next) => {
     console.log("cool", authHeader)
     if(token === null) return res.sendStatus(401)
     jwt.verify(token, process.env.ACCESS_TOKEN_HASH, (err,user) => {
-        if(err) return res.sendStatus(403)
+        if(err){
+            if(err.name === "TokenExpiredError"){
+                res.statusMessage = "token_expired";
+                res.status(403).end();
+            }
+            res.sendStatus(403)
+        }
         req.user = user
         next()
     })
