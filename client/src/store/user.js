@@ -8,7 +8,6 @@ const useUserStore = create((set,get) => ({
     refreshToken: "",
     updateAccessToken: async () =>{
         const { refreshToken } = get()
-        console.log(refreshToken)
         const {data} = await axios.post('http://localhost:4000/token', {refreshToken}, configureRequestHeaders(refreshToken) )
         if(data){
             set({accessToken: data.accessToken})
@@ -17,7 +16,10 @@ const useUserStore = create((set,get) => ({
     },
     setUser: ((walletId,  refreshToken, accessToken) => set({walletId,  refreshToken, accessToken})),
     setUsername: ((username) => set({username})),
-    logoutRevocation: () => set({ walletId: "", accessToken: "", refreshToken: "" }),
+    logoutRevocation: () => {
+        window.localStorage.removeItem("authTokens")
+        set({ walletId: "", accessToken: "", refreshToken: "" })
+    },
 }))
 
 export default useUserStore

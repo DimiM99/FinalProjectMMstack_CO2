@@ -1,7 +1,6 @@
-import axios from "axios";
-import {configureRequestHeaders} from "../utils/configureRequestHeaders";
+import axiosInstance from "../utils/axiosInstances";
 
 export async function updateUsername(walletId, accessToken, newUsername) {
-    const res = await axios.post("http://localhost:3001/updateusername", {newUsername, walletId}, configureRequestHeaders(accessToken))
+    const res = await axiosInstance.post("http://localhost:3001/updateusername", {newUsername, accessToken, walletId})
     return res.status
 }

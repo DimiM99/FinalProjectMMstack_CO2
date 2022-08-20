@@ -16,22 +16,10 @@ const Settings = () => {
         if(newUsername && accessToken && walletId){
             updateUsername(walletId, accessToken, newUsername).then(res=> {
                 if(res === 200){
-                    console.log("username successfully updated")
                     setUsername(newUsername)
                 }
             }).catch(e=> {
-                if (e.response.statusText === "token_expired"){
-                    console.log("token expired")
-                    updateAccessToken(refreshToken)
-                    onSubmit()
-                    // console.log("expired")
-                    // updateUsername(walletId,accessToken, newUsername).then(res=>{
-                    //     if(res === 200){
-                    //         console.log("username successfully updated")
-                    //         setUsername(newUsername)
-                    //     }
-                    // }).catch(e=> console.log(e))
-                }
+                console.log(e)
             })
         }
     }
