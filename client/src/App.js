@@ -37,7 +37,6 @@ function App() {
                 .catch(e=>console.log(e))
         }
     },[walletId])
-
   return (
     <div className="App">
         {user.accessToken && isUsernameSet  ? (

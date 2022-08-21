@@ -5,8 +5,10 @@ import SideBar from "../components/SideBar"
 import { Routes, Route } from "react-router-dom"
 import Settings from "../components/Settings";
 import MainView from "./MainView";
-import Test from "../components/test"
 
+function ListOverview() {
+    return "ListOverview";
+}
 const Overview = () => {
     return (
         <Box sx={{height: "100%"}}>
@@ -16,7 +18,6 @@ const Overview = () => {
                 <Routes>
                    <Route path="/" element={ <MainView/> } />
                    <Route path="/settings" element={ <Settings/> } />
-                   <Route path="/test" element={ <Test/> } />
                 </Routes>
             </Box>
         </Box>

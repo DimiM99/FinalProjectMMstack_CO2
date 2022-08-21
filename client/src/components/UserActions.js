@@ -8,6 +8,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 export default function IconButtons() {
     let navigate = useNavigate()
     let location = useLocation()
+    console.log(location)
     return (
         <Box marginTop='10px'>
             <IconButton aria-label="Settings" onClick={ () => location.pathname ===  "/settings" ? navigate("/") : navigate("/settings") }>

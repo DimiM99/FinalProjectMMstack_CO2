@@ -5,7 +5,7 @@ import {Typography, TextField, Button} from "@mui/material";
 import {updateUsername} from "../apis/api";
 
 const Settings = () => {
-    const {username, accessToken, walletId, setUsername, updateAccessToken, refreshToken} = useUserStore()
+    const {username, accessToken, walletId, setUsername} = useUserStore()
 
     const [newUsername, setNewUsername] = useState("")
 
@@ -16,11 +16,10 @@ const Settings = () => {
         if(newUsername && accessToken && walletId){
             updateUsername(walletId, accessToken, newUsername).then(res=> {
                 if(res === 200){
+                    console.log("username successfully updated")
                     setUsername(newUsername)
                 }
-            }).catch(e=> {
-                console.log(e)
-            })
+            }).catch(e=> console.log(e.response.statusText))
         }
     }
     return (

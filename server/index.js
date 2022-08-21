@@ -21,28 +21,44 @@ connection.once('open', function() {
 	console.log("MongoDB database connection established successfully");
 })
 
-app.post("/user",authenticateToken, async (req,res)=>{
+app.post("/login", async (req,res)=>{
 	const {walletId} = req.body
 	if(!req.body) return
 	try {
-		const user = await User.findOne({walletId})
-		if ( user === null) {
-			const newUser = await User.create({
-				walletId: walletId
-			})
-			await newUser.save()
+		const temp = await User.findOne({walletId: walletId})
+		if ( temp == null ) {
+			await User.create({walletId: walletId})
+		} else {
+			console.log("already registeresd")
 		}
-		// else {
-		// 		console.log("already registered")
-		// 	}
-		res.json(user)
+		// res.json(user)
+	}catch (e) {
+		console.log(e.message)
+	}
+	// res.send()
+})
+app.get("/getsimpledata", authenticateToken, async (req,res)=>{
+	const {walletId, accessToken, refreshToken} = req.body
+	if(!req.body) return
+	try {
+		const temp = await User.find({})
+		res.json(temp)
 	}catch (e) {
 		console.log(e.message)
 	}
 })
-
-
+app.get("/user", authenticateToken, async (req,res)=>{
+	const {walletId} = req.user
+	if(!req.body) return
+	try {
+		const response = await User.findOne({walletId: walletId})
+		res.json(response)
+	}catch (e) {
+		console.log(e.message)
+	}
+})
 app.post("/updateusername", authenticateToken,  async (req,res)=>{
+	console.log('wtf', req.headers['authorization'])
 	const {walletId, newUsername} = req.body
 	if(!req.body) return
 	try {
