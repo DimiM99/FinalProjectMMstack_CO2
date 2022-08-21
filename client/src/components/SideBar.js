@@ -21,7 +21,7 @@ export default function PermanentDrawerLeft() {
             }}
         >
             <Box sx={{ overflow: 'auto' }}>
-                <Box sx={{ padding: '30px', display: 'flex', alignItems: "center", flexDirection: 'column'}}>
+                <Box sx={{ padding: '30px', display: 'flex', alignItems: "center", flexDirection: 'column', gap: '15px'}}>
                     <UserInfo/>
                     <UserActions/>
                     <TasksProgress/>

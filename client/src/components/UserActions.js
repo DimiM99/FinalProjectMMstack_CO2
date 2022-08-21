@@ -10,7 +10,7 @@ export default function IconButtons() {
     let location = useLocation()
     console.log(location)
     return (
-        <Box marginTop='10px'>
+        <Box>
             <IconButton aria-label="Settings" onClick={ () => location.pathname ===  "/settings" ? navigate("/") : navigate("/settings") }>
                 {!(location.pathname ===  "/settings") ? (<SettingsIcon/>) : (<HomeIcon/>)}
             </IconButton>

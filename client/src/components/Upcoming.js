@@ -30,7 +30,7 @@ const Upcoming = () => {
   return (
     <Box display="flex" alignItems="center" flexDirection="column">
         <Typography sx={{mt: 1, marginBottom: '10px'}} variant="h6">Upcoming</Typography>
-        <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', justifyContent: 'space-between'}}>
+        <List sx={{ width: '100%', backgroundgcolor: 'background.paper'}}>
       {[0, 1, 2, 3].map((value) => {
         const labelId = `checkbox-list-label-${value}`;
 
@@ -46,7 +46,7 @@ const Upcoming = () => {
             sx={{width: '100%'}}
           >
             <ListItemButton onClick={handleToggle(value)} dense>
-              <ListItemIcon sx={{margin: 0}}>
+              <ListItemIcon sx={{margin: 0, minWidth: '0'}}>
                 <Checkbox
                   edge="start"
                   checked={checked.indexOf(value) !== -1}
