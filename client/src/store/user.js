@@ -16,10 +16,7 @@ const useUserStore = create((set,get) => ({
     },
     setUser: ((walletId,  refreshToken, accessToken) => set({walletId,  refreshToken, accessToken})),
     setUsername: ((username) => set({username})),
-    logoutRevocation: () => {
-        window.localStorage.removeItem("authTokens")
-        set({ walletId: "", accessToken: "", refreshToken: "" })
-    },
+    logoutRevocation: () => set({ walletId: "", accessToken: "", refreshToken: "" }),
 }))
 
 export default useUserStore
