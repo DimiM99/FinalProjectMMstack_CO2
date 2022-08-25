@@ -53,6 +53,20 @@ app.post("/updateusername", authenticateToken,  async (req,res)=>{
 	}
 })
 
+
+app.post("/addList", authenticateToken, async (req,res)=>{
+	const {walletId, listId, name, color} = req.body
+	if(!req.body) return
+	try {
+		const user = await User.findOne({walletId})
+		user.data.lists.push({listId, name, color, data: []})
+		await user.save()
+		res.sendStatus(200)
+	}catch (e) {
+		console.log(e.message)
+	}
+});
+
 app.listen(process.env.INDEX_PORT, function() {
 	console.log("Server is running on Port: " + process.env.INDEX_PORT);
 });

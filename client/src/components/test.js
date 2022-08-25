@@ -3,8 +3,10 @@ import useUserStore from '../store/user'
 import useAxiosPrivate from "../hooks/axiosInterceptor";
 import axios from 'axios'
 import SetUsernameModal from "./SetUsernameModal";
+import { addList } from '../apis/api';
+
 const Test = () => {
-    const {updateAccessToken, accessToken, logoutRevocation} = useUserStore()
+    const {walletId, updateAccessToken, accessToken, logoutRevocation} = useUserStore()
     console.log("accessToken : ",accessToken)
     const [open, setOpen] = useState(false)
 
@@ -19,6 +21,8 @@ const Test = () => {
             <button onClick={getData}>test</button>
             <button onClick={logoutRevocation}>logout</button>
             <button onClick={()=> setOpen(true)}>open Modal for username</button>
+            <button onClick={()=> addList(walletId, 1, "Some List", "green")}>addList</button>
+
             <SetUsernameModal open={open} setOpen={setOpen}/>
         </div>
     );
