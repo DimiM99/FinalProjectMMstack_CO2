@@ -73,8 +73,6 @@ app.post("/deleteList", authenticateToken, async (req,res)=>{
 	if(!req.body) return
 	try {
 		await User.updateOne({walletId}, {$pull: {"data.lists": {_id: id}}})
-		
-		console.log(user)
 		res.sendStatus(200)
 	}catch (e) {
 		console.log(e.message)
