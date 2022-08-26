@@ -9,3 +9,8 @@ export async function addList(walletId, listId, name, color){
     const res = await axiosInstance.post("http://localhost:3001/addList", {walletId, listId, name, color})
     return res.status
 }
+
+export async function deleteList(walletId, listObjectId){
+    const res = await axiosInstance.post("http://localhost:3001/deleteList", {walletId, listObjectId})
+    return res.status
+}

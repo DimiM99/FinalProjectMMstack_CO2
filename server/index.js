@@ -59,13 +59,27 @@ app.post("/addList", authenticateToken, async (req,res)=>{
 	if(!req.body) return
 	try {
 		const user = await User.findOne({walletId})
-		user.data.lists.push({listId, name, color, data: []})
+		user.data.lists.push({name, listId, color, data: []})
 		await user.save()
 		res.sendStatus(200)
 	}catch (e) {
 		console.log(e.message)
 	}
 });
+
+app.post("/deleteList", authenticateToken, async (req,res)=>{
+	const {walletId, listObjectId} = req.body
+	const id = mongoose.Types.ObjectId(listObjectId);
+	if(!req.body) return
+	try {
+		await User.updateOne({walletId}, {$pull: {"data.lists": {_id: id}}})
+		
+		console.log(user)
+		res.sendStatus(200)
+	}catch (e) {
+		console.log(e.message)
+	}
+})
 
 app.listen(process.env.INDEX_PORT, function() {
 	console.log("Server is running on Port: " + process.env.INDEX_PORT);
