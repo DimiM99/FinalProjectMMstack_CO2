@@ -85,6 +85,8 @@ app.post("/deleteTask", authenticateToken, async (req,res)=>{
 	const taskId = mongoose.Types.ObjectId(taskObjectId)
 	if(!req.body) return
 	try {
+
+		//data.lists[].data is a place holder
 		const user = await User.updateOne({"data.lists._id": listId}, {$pull: {"data.lists[].data": {_id: taskId}}})
 		console.log(user)
 		res.sendStatus(200)
