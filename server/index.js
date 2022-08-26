@@ -59,7 +59,7 @@ app.post("/addList", authenticateToken, async (req,res)=>{
 	if(!req.body) return
 	try {
 		const user = await User.findOne({walletId})
-		user.data.lists.push({name, listId, color, data: []})
+		user.data.lists.push({ listId, name, color, data: [{}]})
 		await user.save()
 		res.sendStatus(200)
 	}catch (e) {
@@ -78,6 +78,22 @@ app.post("/deleteList", authenticateToken, async (req,res)=>{
 		console.log(e.message)
 	}
 })
+
+app.post("/deleteTask", authenticateToken, async (req,res)=>{
+	const {walletId, listObjectId, taskObjectId} = req.body
+	const listId = mongoose.Types.ObjectId(listObjectId);
+	const taskId = mongoose.Types.ObjectId(taskObjectId)
+	if(!req.body) return
+	try {
+		const user = await User.updateOne({"data.lists._id": listId}, {$pull: {"data.lists[].data": {_id: taskId}}})
+		console.log(user)
+		res.sendStatus(200)
+	}catch (e) {
+		console.log(e.message)
+	}
+})
+
+
 
 app.listen(process.env.INDEX_PORT, function() {
 	console.log("Server is running on Port: " + process.env.INDEX_PORT);

@@ -14,3 +14,8 @@ export async function deleteList(walletId, listObjectId){
     const res = await axiosInstance.post("http://localhost:3001/deleteList", {walletId, listObjectId})
     return res.status
 }
+
+export async function deleteTask(walletId, listObjectId, taskObjectId){
+    const res = await axiosInstance.post("http://localhost:3001/deleteTask", {walletId, listObjectId, taskObjectId})
+    return res.status
+}
