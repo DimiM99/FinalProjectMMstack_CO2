@@ -23,7 +23,7 @@ const Test = () => {
             <button onClick={()=> setOpen(true)}>open Modal for username</button>
             <button onClick={()=> addList(walletId, 3, "Some List", "green")}>addList</button>
             <button onClick={()=> deleteList(walletId, '6308fa6fb10a0ad11bb05226')}>deleteList</button>
-            <button onClick={()=> deleteTask(walletId, '630901031fc33c91be6ba0cd', '630901031fc33c91be6ba0ce')}>deleteTask</button>
+            <button onClick={()=> deleteTask(walletId, '630a0d19aa855425c0bc8b51', '630a0d52ce9455cd62e50a1e')}>deleteTask</button>
 
             <SetUsernameModal open={open} setOpen={setOpen}/>
         </div>

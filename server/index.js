@@ -86,9 +86,26 @@ app.post("/deleteTask", authenticateToken, async (req,res)=>{
 	if(!req.body) return
 	try {
 
-		//data.lists[].data is a place holder
-		const user = await User.updateOne({"data.lists._id": listId}, {$pull: {"data.lists[].data": {_id: taskId}}})
-		console.log(user)
+		const user = await User.findOne({walletId})
+		let taskIndex;
+		let listIndex;
+		i = 0;
+		user.data.lists.forEach(list => {
+			j = 0;
+			if ((list._id + "") === (listId + "")){
+				list.data.forEach(task => {
+					if((task._id + "") === (taskId + "")){
+						taskIndex = j;
+					}
+					j += 1;
+				})
+				listIndex = i;
+			}
+			i += 1;
+		});
+		
+		user.data.lists[listIndex].data.splice(taskIndex, 1)
+		await user.save()
 		res.sendStatus(200)
 	}catch (e) {
 		console.log(e.message)
