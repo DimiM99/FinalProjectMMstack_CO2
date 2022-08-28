@@ -13,9 +13,7 @@ import {useEffect} from "react";
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
-import ListItem from '@mui/material/ListItem';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import { display } from '@mui/system';
+
 
 
 export default function ListsView({selectedList, setSelectedList}) {
@@ -23,14 +21,13 @@ export default function ListsView({selectedList, setSelectedList}) {
     const [selectedIndex, setSelectedIndex] = React.useState();
     const [lists, setLists] = React.useState([]);
     const [updated, setUpdated] = React.useState(true);
-    const [deleted, setDeleted] = React.useState(true);
     const [open, setOpen] = React.useState(false)
 
     useEffect(() => {
         getAllLists(walletId, accessToken).then((data) => {
             setLists(data);
         });
-    }, [updated, walletId, accessToken, deleted]);
+    }, [updated, walletId, accessToken]);
 
     const handleListItemClick = (event, index, id) => {
         setSelectedIndex(index);
@@ -39,7 +36,7 @@ export default function ListsView({selectedList, setSelectedList}) {
 
     const handleDelete = (event,id)=>{
         deleteList(walletId, id)
-        setDeleted(!deleted)
+        setUpdated(!updated)
     }
 
     return (
