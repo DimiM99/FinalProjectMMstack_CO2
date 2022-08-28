@@ -6,11 +6,15 @@ import TasksView from "../components/TasksView";
 
 
 export default function MainView() {
+
+    const [selectedList, setSelectedList] = React.useState(null);
+
     return (
         <Box sx={{height: "100%", display: 'flex', flexDirection: 'row'}}>
-            <ListsView/>
+            <ListsView selectedList={selectedList} setSelectedList={setSelectedList}/>
             <Divider orientation="vertical" flexItem />
-            <TasksView/>
+            <TasksView selectedList={selectedList}/>
         </Box>
     );
+
 }
