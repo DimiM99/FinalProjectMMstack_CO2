@@ -36,6 +36,7 @@ export default function ListsView({selectedList, setSelectedList}) {
 
     const handleDelete = (event,id)=>{
         deleteList(walletId, id, accessToken).then(()=>{
+            setSelectedList(!selectedList)
             setUpdated(!updated);
         });
         
