@@ -5,18 +5,23 @@ export async function updateUsername(walletId, accessToken, newUsername) {
     return res.status
 }
 
-export async function addList(walletId, listId, name, color){
-    const res = await axiosInstance.post("http://localhost:3001/addList", {walletId, listId, name, color})
+export async function addList(walletId, listId, name, color , accessToken){
+    const res = await axiosInstance.post("http://localhost:3001/addList", {walletId, listId, name, color , accessToken})
     return res.status
 }
 
-export async function deleteList(walletId, listObjectId){
-    const res = await axiosInstance.post("http://localhost:3001/deleteList", {walletId, listObjectId})
+export async function deleteList(walletId, listObjectId, accessToken){
+    const res = await axiosInstance.post("http://localhost:3001/deleteList", {walletId, listObjectId, accessToken})
     return res.status
 }
 
-export async function deleteTask(walletId, listObjectId, taskObjectId){
-    const res = await axiosInstance.post("http://localhost:3001/deleteTask", {walletId, listObjectId, taskObjectId})
+export async function addTask(walletId, listId, taskHeading, status, expirationTimestamp, accessToken){
+    const res = await axiosInstance.post("http://localhost:3001/addTask", {walletId, listId, taskHeading, status, expirationTimestamp, accessToken})
+    return res.status
+}
+
+export async function deleteTask(walletId, listObjectId, taskObjectId, accessToken){
+    const res = await axiosInstance.post("http://localhost:3001/deleteTask", {walletId, listObjectId, taskObjectId, accessToken})
     return res.status
 }
 

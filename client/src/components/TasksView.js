@@ -5,20 +5,26 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
-import {getTaks} from '../apis/api';
+import {getTaks, deleteTask} from '../apis/api';
 import useUserStore from '../store/user';
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+import AddIcon from '@mui/icons-material/Add';
+import CreateNewTaskModal from "./CreateNewTaskModal";
 
 export default function TasksView({selectedList}) {
     const [checked, setChecked] = React.useState([]);
     const [tasks, setTasks] = React.useState([]);
     const {walletId, accessToken} = useUserStore();
+    const [updated, setUpdated] = React.useState(true);
+    const [open, setOpen] = React.useState(false)
 
     React.useEffect(() => {
         getTaks(selectedList, walletId, accessToken).then((data) => {
             setTasks(data);
             getTasksStatuses(data)
         });
-    }, [selectedList, walletId, accessToken]);
+    }, [selectedList, walletId, updated, accessToken]);
 
     const handleToggle = (value) => () => {
         const currentIndex = checked.indexOf(value);
@@ -34,6 +40,8 @@ export default function TasksView({selectedList}) {
     };
 
 
+
+
     const getTasksStatuses = (data) => () => {
         let statueses = data.map( (task) => {
             if (task.status === true) {
@@ -43,6 +51,13 @@ export default function TasksView({selectedList}) {
         setChecked(statueses)
         console.log(checked)
     };
+
+    const handleDelete = (event,id)=>{
+        deleteTask(walletId, selectedList, id, accessToken).then(()=>{
+            setUpdated(!updated);
+        });
+        
+    }
 
     //placehoder design for now
     if (!selectedList) {
@@ -59,8 +74,9 @@ export default function TasksView({selectedList}) {
         <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
             {tasks.map((task, index) => {
                 return (
+                    
                     <ListItem key={index} disablePadding>
-                        <ListItemButton onClick={handleToggle(index)} dense>
+                        <ListItemButton sx={{marginRight: '30px',}} onClick={handleToggle(index)} dense>
                             <ListItemIcon>
                                 <Checkbox
                                     edge="start"
@@ -71,10 +87,25 @@ export default function TasksView({selectedList}) {
                                 />
                             </ListItemIcon>
                             <ListItemText primary={task.taskHeading} />
+                            <IconButton edge="end" aria-label="delete" onClick={(event) => handleDelete(event,task._id)}>
+                                <DeleteIcon />
+                            </IconButton>
                         </ListItemButton>
                     </ListItem>
+                    
                 )
             })}
+
+            <ListItemButton
+                onClick = { () => setOpen(true) }
+                >
+                    <ListItemIcon sx={{minWidth: '0px', paddingRight: '16px'}}>
+                        <AddIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary="New Task" />
+            </ListItemButton>
+            <CreateNewTaskModal open={open} setOpen={setOpen} selectedList={selectedList} updated={updated} setUpdated={setUpdated}/>
+
         </List>
     );
 }

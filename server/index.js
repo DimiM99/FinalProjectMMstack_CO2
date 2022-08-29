@@ -53,18 +53,6 @@ app.post("/updateusername", authenticateToken,  async (req,res)=>{
 	}
 })
 
-app.post("/userlists", authenticateToken, async (req,res)=>{
-	const {walletId} = req.body
-	if(!req.body) return
-	try {
-		const user = await User.findOne({walletId})
-		res.json(user.data.lists)
-	}catch (e) {
-		console.log(e.message)
-	}
-});
-
-
 app.post("/addList", authenticateToken, async (req,res)=>{
 	const {walletId, listId, name, color} = req.body
 	if(!req.body) return
@@ -78,7 +66,6 @@ app.post("/addList", authenticateToken, async (req,res)=>{
 	}
 });
 
-//get user's lists from the database
 app.post("/userlists", authenticateToken, async (req,res)=>{
 	const {walletId} = req.body
 	if(!req.body) return
@@ -110,7 +97,7 @@ app.post("/addtask", authenticateToken, async (req,res)=>{
 	if(!req.body) return
 	try {
 		const user = await User.findOne({walletId})
-		const list = user.data.lists.find(list => list.id === listId)
+		const list = user.data.lists.find(list => list._id === listId)
 		list.data.push({taskHeading, status, expirationTimestamp})
 		await user.save()
 		res.sendStatus(200)
