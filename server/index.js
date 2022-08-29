@@ -58,7 +58,7 @@ app.post("/addList", authenticateToken, async (req,res)=>{
 	if(!req.body) return
 	try {
 		const user = await User.findOne({walletId})
-		user.data.lists.push({ listId, name, color, data: [{}]})
+		user.data.lists.push({ listId, name, color})
 		await user.save()
 		res.sendStatus(200)
 	}catch (e) {
@@ -97,7 +97,8 @@ app.post("/addtask", authenticateToken, async (req,res)=>{
 	if(!req.body) return
 	try {
 		const user = await User.findOne({walletId})
-		const list = user.data.lists.find(list => list._id === listId)
+		const list = user.data.lists.find(list => ((list._id+"") === (listId +"")))
+		console.log(expirationTimestamp + "")
 		list.data.push({taskHeading, status, expirationTimestamp})
 		await user.save()
 		res.sendStatus(200)

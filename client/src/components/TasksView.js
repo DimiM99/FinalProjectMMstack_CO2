@@ -87,6 +87,7 @@ export default function TasksView({selectedList}) {
                                 />
                             </ListItemIcon>
                             <ListItemText primary={task.taskHeading} />
+                            <ListItemText primary={task.expirationTimestamp} />
                             <IconButton edge="end" aria-label="delete" onClick={(event) => handleDelete(event,task._id)}>
                                 <DeleteIcon />
                             </IconButton>

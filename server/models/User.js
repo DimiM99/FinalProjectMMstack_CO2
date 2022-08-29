@@ -17,7 +17,7 @@ const userSchema = new Schema({
 			data: [{
 				taskHeading: String,
 				status: Boolean,
-				expirationTimestamp: Number
+				expirationTimestamp: String
 			}]
 		}]
 	}
