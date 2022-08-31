@@ -21,26 +21,21 @@ import dayjs from 'dayjs';
 const CreateNewTaskModal = ({open, setOpen, selectedList, updated, setUpdated}) => {
     const {accessToken, walletId} = useUserStore();
     const [taskHeading, setTaskHeading] = useState('');
-    const [timeSet, setTimeSet] = useState(false);
-    const [value, setValue] = React.useState(dayjs('2014-08-18T21:11:54'));
-    React.useEffect(() => {
-        setValue(DateTimePicker.date)
-    }, []);
+    const [value, setValue] = React.useState(dayjs(DateTimePicker.date));
+    
 
     const handleChange = (newValue) => {
         setValue(newValue);
-        setTimeSet(true);
     };
 
     const handleSubmit = async () => {
 
-        if (accessToken && walletId && taskHeading && selectedList &&value && timeSet) {
+        if (accessToken && walletId && taskHeading && selectedList &&value) {
            
             addTask(walletId, selectedList, taskHeading, false, (value.toISOString()), accessToken).then( res => {
                 if (res === 200) {
                     setOpen(false);
                     setUpdated(!updated)
-                    
                 }
             })
         }else{
