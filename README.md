@@ -7,7 +7,8 @@ The idea for the Project/Website was to Crete a todo List organiser in a form of
 In addition of fulfilling all requirements, it also was a learning and challenge opportunity, so we went with it. 
 
 The initial design/mock-up was done in Adobe XD. Initial prototype was a guide and rough representation of the idea.<br> 
-It is missing some elements, but the details were never the point of this.
+It is missing some elements, but the details were never the point of this.<br>
+[Link to the Prototype file](https://xd.adobe.com/view/b0e799dc-c3cf-49af-b106-86000aa6ac9d-e5b4/)
 
 Backend was written using Node.js as instructed. Express.js framework was used on top.<br>
 As database persistency layer MongoDB is a schema-less NoSQL document database was chosen.<br>
