@@ -61,8 +61,6 @@ export default function SearchAppBar() {
         <AppBar sx={{
         height: "108px",
         display: "flex",
-        
-        flexDirection: 'row',
         backgroundColor: '#ffffff',
         color: 'rgba(0, 0, 0, 0.87)',
         borderBottom: 'ridge',
@@ -71,44 +69,24 @@ export default function SearchAppBar() {
         
         }} variant="permanent">
              
-            <Box sx={{
-                //borderRight: 'ridge',
-                width: drawerWidth,
-                height: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                textAlign: 'center'
+            <Typography
+                variant="h6"
+                noWrap
+                component="div"
                 
-                }}>
-                <Typography
-                    variant="h6"
-                    noWrap
-                    component="div"
+                sx={{ 
+                    display: 'flex',
+                    height: '100%',
+                    justifyContent: 'center',
+                    alignItems: 'center',
                     
-                    sx={{ 
-                        flexGrow: 1,
-                        display: { xs: 'none', sm: 'block' },
-                        justifyContent: 'center',
-                        fontWeight: '600'
-                    }}
-                >
-                    MEGA TO DO LIST
-                </Typography>
-            </Box>
-            <Divider orientation="vertical"/>
-            <Toolbar>
-                <Search>
-                    <SearchIconWrapper>
-                        <SearchIcon fontSize="large"/>
-                    </SearchIconWrapper>
-                
-                    
-                    <StyledInputBase
-                        placeholder="Search…"
-                        inputProps={{ 'aria-label': 'search' }}
-                    />
-                </Search>
-            </Toolbar>
+                    fontWeight: '600'
+                }}
+            >
+                MEGA TO DO LIST
+            </Typography>
+        
+            
         </AppBar>
     
     );
