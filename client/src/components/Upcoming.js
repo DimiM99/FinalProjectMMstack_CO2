@@ -40,7 +40,7 @@ const Upcoming = () => {
             disablePadding
             sx={{width: '100%'}}
           >
-              <ListItemText primary={`${taskHeading} | Due by: ${new Date(expirationTimestamp).toLocaleDateString("en-US")}`} />
+              <ListItemText primary={`${taskHeading} | Due by: ${new Date(expirationTimestamp).toISOString()}`} />
           </ListItem>
         );
       })}
