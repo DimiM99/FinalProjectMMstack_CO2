@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Divider from '@mui/material/Divider';
 import UserInfo from "./UserInfo";
-import TasksProgress from "./TasksProgress";
+
 import UserActions from "./UserActions";
 import Upcoming from './Upcoming';
 
@@ -24,7 +24,7 @@ export default function PermanentDrawerLeft() {
                 <Box sx={{ padding: '30px', display: 'flex', alignItems: "center", flexDirection: 'column', gap: '15px'}}>
                     <UserInfo/>
                     <UserActions/>
-                    <TasksProgress/>
+                    
                 </Box>
                 <Divider />
                 <Box sx={{ display: 'flex', alignItems: "center", flexDirection: 'column', width: '100%'}}>
