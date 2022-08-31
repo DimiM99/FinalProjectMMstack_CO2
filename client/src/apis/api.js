@@ -30,11 +30,6 @@ export async function getAllLists(walletId, accessToken) {
     return res.data
 }
 
-export async function addNewList(walletId, accessToken, listId, name, color){
-    const res = await axiosInstance.post("http://localhost:3001/addList", {walletId, accessToken, listId, name, color})
-    return res.status
-}
-
 export async function getTaks(listId, walletId ,accessToken){
     const res = await axiosInstance.post("http://localhost:3001/listtasks", {listId, walletId, accessToken})
     return res.data

@@ -35,11 +35,12 @@ export default function ListsView({selectedList, setSelectedList}) {
     };
 
     const handleDelete = (event,id)=>{
-        deleteList(walletId, id, accessToken).then(()=>{
-            setSelectedList(!selectedList)
-            setUpdated(!updated);
-        });
-        
+        if (walletId&& id&& accessToken){
+            deleteList(walletId, id, accessToken).then(()=>{
+                setSelectedList(!selectedList)
+                setUpdated(!updated);
+            });
+        }
     }
 
     return (

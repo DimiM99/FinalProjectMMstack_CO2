@@ -38,7 +38,9 @@ const CreateNewTaskModal = ({open, setOpen, selectedList, updated, setUpdated}) 
                     setOpen(false);
                     setUpdated(!updated)
                 }
-            })
+            });
+        }else{
+            alert("Please fill in the form bevor submitting")
         }
     }
 
