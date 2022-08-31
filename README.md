@@ -35,3 +35,16 @@ Everyone would write detailed assignment of the elements they were about to impl
 This eliminated the need of frequent syncup meetings<br> 
 and made clear who works on what and with whom you need to sync if there were conflicts/dependence on the feature you're working on.<br> 
 Statuses of assignments made stagin and merging and reviewing branches easier. Special thanks to Mateusz for clearing this out.
+
+#### To run the app.
+* In the server directory
+
+```
+npm run startAuth 
+npm start
+```
+* In the client directory
+```
+yarn start
+```
+
