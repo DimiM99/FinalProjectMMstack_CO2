@@ -32,7 +32,7 @@ const CreateNewTaskModal = ({open, setOpen, selectedList, updated, setUpdated}) 
         const v = value.date
         console.log(v)
         if (accessToken && walletId && taskHeading && selectedList && value) {
-           console.log("asdfas")
+           
             addTask(walletId, selectedList, taskHeading, false, (value.toISOString()), accessToken).then( res => {
                 if (res === 200) {
                     setOpen(false);

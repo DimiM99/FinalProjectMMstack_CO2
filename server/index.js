@@ -66,6 +66,7 @@ app.post("/addList", authenticateToken, async (req,res)=>{
 	}
 });
 
+
 app.post("/userlists", authenticateToken, async (req,res)=>{
 	const {walletId} = req.body
 	if(!req.body) return
@@ -98,7 +99,6 @@ app.post("/addtask", authenticateToken, async (req,res)=>{
 	try {
 		const user = await User.findOne({walletId})
 		const list = user.data.lists.find(list => ((list._id+"") === (listId +"")))
-		console.log(expirationTimestamp + "")
 		list.data.push({taskHeading, status, expirationTimestamp})
 		await user.save()
 		res.sendStatus(200)
@@ -115,6 +115,37 @@ app.post("/listtasks", authenticateToken, async (req,res)=>{
 		const result = await User.findOne({walletId})
 		const list = result.data.lists.filter(list => (list._id + "") === (listId + ""))
 		res.json(list[0].data)
+	}catch (e) {
+		console.log(e.message)
+	}
+});
+
+app.post("/checkTask", authenticateToken, async (req,res)=>{
+	const {walletId, listId, taskId} = req.body
+	if(!req.body) return
+	try {
+		const user = await User.findOne({walletId})
+		let taskIndex;
+		let listIndex;
+		i = 0;
+		user.data.lists.forEach(list => {
+			j = 0;
+			if ((list._id + "") === (listId + "")){
+				list.data.forEach(task => {
+					if((task._id + "") === (taskId + "")){
+						taskIndex = j;
+					}
+					j += 1;
+				})
+				listIndex = i;
+			}
+			i += 1;
+		});
+		
+		const task = user.data.lists[listIndex].data[taskIndex]
+		task.status = !task.status
+		await user.save()
+		res.sendStatus(200)
 	}catch (e) {
 		console.log(e.message)
 	}
