@@ -103,7 +103,7 @@ app.post("/addtask", authenticateToken, async (req,res)=>{
 		await user.save()
 		res.sendStatus(200)
 	}catch (e) {
-		console.log(e.message)
+		res.sendStatus(400)
 	}
 });
 
@@ -183,45 +183,6 @@ app.post("/deleteTask", authenticateToken, async (req,res)=>{
 		console.log(e.message)
 	}
 })
-
-app.post("/getAllTasks", authenticateToken, async (req,res)=>{
-	const {walletId} = req.body
-	let allTasks = []
-	if(!req.body) return
-	try {
-		const result = await User.findOne({walletId})
-		result.data.lists.forEach(list =>{
-			list.data.forEach(task =>{
-				allTasks.push(task)
-			})
-		})
-		console.log(allTasks)
-		res.send(allTasks)
-	}catch (e) {
-		console.log(e.message)
-	}
-});
-
-app.post("/getListFromTaskId", authenticateToken, async (req,res)=>{
-	const {walletId, taskId} = req.body
-	let theList = "123"
-	console.log("something")
-	if(!req.body) return
-	try {
-		const result = await User.findOne({walletId})
-		result.data.lists.forEach(list =>{
-			list.data.forEach(task =>{
-				if((task._id + "") === (taskId + "")){
-					theList = list
-				}
-			})
-		})
-		console.log(theList)
-		res.send(theList)
-	}catch (e) {
-		console.log(e.message)
-	}
-});
 
 
 

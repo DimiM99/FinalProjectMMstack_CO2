@@ -21,7 +21,7 @@ import dayjs from 'dayjs';
 const CreateNewTaskModal = ({open, setOpen, selectedList, updated, setUpdated}) => {
     const {accessToken, walletId} = useUserStore();
     const [taskHeading, setTaskHeading] = useState('');
-   
+    const [timeSet, setTimeSet] = useState(false);
     const [value, setValue] = React.useState(dayjs('2014-08-18T21:11:54'));
     React.useEffect(() => {
         setValue(DateTimePicker.date)
@@ -29,12 +29,12 @@ const CreateNewTaskModal = ({open, setOpen, selectedList, updated, setUpdated}) 
 
     const handleChange = (newValue) => {
         setValue(newValue);
+        setTimeSet(true);
     };
 
     const handleSubmit = async () => {
-        const v = value.date
-        console.log(v)
-        if (accessToken && walletId && taskHeading && selectedList && value) {
+
+        if (accessToken && walletId && taskHeading && selectedList &&value && timeSet) {
            
             addTask(walletId, selectedList, taskHeading, false, (value.toISOString()), accessToken).then( res => {
                 if (res === 200) {
@@ -42,9 +42,9 @@ const CreateNewTaskModal = ({open, setOpen, selectedList, updated, setUpdated}) 
                     setUpdated(!updated)
                     
                 }
-            });
+            })
         }else{
-            alert("Please fill in the form bevor submitting")
+            alert("Please fill in the form befor submitting and enshure that u picked a time and date")
         }
     }
 
