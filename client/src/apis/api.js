@@ -5,8 +5,8 @@ export async function updateUsername(walletId, accessToken, newUsername) {
     return res.status
 }
 
-export async function addList(walletId, listId, name, color , accessToken){
-    const res = await axiosInstance.post("http://localhost:3001/addList", {walletId, listId, name, color , accessToken})
+export async function addList(walletId, name, color , accessToken){
+    const res = await axiosInstance.post("http://localhost:3001/addList", {walletId, name, color , accessToken})
     return res.status
 }
 

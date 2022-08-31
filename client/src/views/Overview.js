@@ -10,9 +10,9 @@ import Test from "../components/test"
 const Overview = () => {
     return (
         <Box sx={{height: "100%"}}>
-            <AppBar/>
+            <AppBar sx/>
             <SideBar/>
-            <Box sx={{ position: "absolute", height: "calc(100% - 108px)", width: "calc(100% - 240px)", left: 240, top: 108}}>
+            <Box variant="permanent" sx={{ position: "absolute", height: "calc(100% - 108px)", width: "calc(100% - 240px)", left: 240, top: 108}}>
                 <Routes>
                    <Route path="/" element={ <MainView/> } />
                    <Route path="/settings" element={ <Settings/> } />

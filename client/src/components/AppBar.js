@@ -61,6 +61,7 @@ export default function SearchAppBar() {
         <AppBar sx={{
         height: "108px",
         display: "flex",
+        
         flexDirection: 'row',
         backgroundColor: '#ffffff',
         color: 'rgba(0, 0, 0, 0.87)',
@@ -68,7 +69,7 @@ export default function SearchAppBar() {
         borderBottomWidth: '1px'
         
         
-        }} position="static">
+        }} variant="permanent">
              
             <Box sx={{
                 //borderRight: 'ridge',

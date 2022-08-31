@@ -54,11 +54,11 @@ app.post("/updateusername", authenticateToken,  async (req,res)=>{
 })
 
 app.post("/addList", authenticateToken, async (req,res)=>{
-	const {walletId, listId, name, color} = req.body
+	const {walletId, name, color} = req.body
 	if(!req.body) return
 	try {
 		const user = await User.findOne({walletId})
-		user.data.lists.push({ listId, name, color})
+		user.data.lists.push({ name, color})
 		await user.save()
 		res.sendStatus(200)
 	}catch (e) {

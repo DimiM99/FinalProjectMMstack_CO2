@@ -18,7 +18,7 @@ export default function CreateNewListModal({open, setOpen, updated, setUpdated})
 
     const handleSubmit = async () => {
         if (accessToken && walletId && name && listId && color) {
-            addNewList(walletId, accessToken, listId, name, color).then( res => {
+            addNewList(walletId, accessToken, name, color).then( res => {
                 if (res === 200) {
                     setOpen(false);
                     setUpdated(!updated)
@@ -49,17 +49,7 @@ export default function CreateNewListModal({open, setOpen, updated, setUpdated})
                     value={name}
                     onChange={(e)=> setName(e.target.value)}
                 />
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="listId"
-                    label="List iD"
-                    type="number"
-                    fullWidth
-                    variant="standard"
-                    value={listId}
-                    onChange={(e)=> setListId(e.target.value)}
-                />
+                
                 <TextField
                     autoFocus
                     margin="dense"
