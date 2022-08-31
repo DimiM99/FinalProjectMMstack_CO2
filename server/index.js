@@ -184,7 +184,23 @@ app.post("/deleteTask", authenticateToken, async (req,res)=>{
 	}
 })
 
-
+app.post("/getAllTasks", authenticateToken, async (req,res)=>{
+	const {walletId} = req.body
+	let allTasks = []
+	if(!req.body) return
+	try {
+		const result = await User.findOne({walletId})
+		const list = result.data.lists.forEach(list =>{
+			list.data.forEach(task =>{
+				allTasks.push(task)
+			})
+		})
+		console.log(allTasks)
+		res.send(allTasks)
+	}catch (e) {
+		console.log(e.message)
+	}
+});
 
 
 
