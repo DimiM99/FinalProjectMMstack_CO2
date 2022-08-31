@@ -13,6 +13,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { DateTimePicker } from '@mui/x-date-pickers';
 import Stack from '@mui/material/Stack';
 import dayjs from 'dayjs';
 
@@ -22,7 +23,9 @@ const CreateNewTaskModal = ({open, setOpen, selectedList, updated, setUpdated}) 
     const [taskHeading, setTaskHeading] = useState('');
    
     const [value, setValue] = React.useState(dayjs('2014-08-18T21:11:54'));
-
+    React.useEffect(() => {
+        setValue(DateTimePicker.date)
+    }, []);
 
     const handleChange = (newValue) => {
         setValue(newValue);
@@ -37,6 +40,7 @@ const CreateNewTaskModal = ({open, setOpen, selectedList, updated, setUpdated}) 
                 if (res === 200) {
                     setOpen(false);
                     setUpdated(!updated)
+                    
                 }
             });
         }else{
