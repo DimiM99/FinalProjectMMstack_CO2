@@ -1,6 +1,6 @@
 ### MonoRepo for the project in CO2 WebDev module of a dynamic website. 
 
-Team members: Mateusz Boratynski, Dmitri Moscoglo and Veit Brunnenhuber. <br>
+Team members: Mateusz Boratynski, Dmitri Moscoglo and Veit Brunnhuber. <br>
 (Recent changes to the team were made. Initially Maharram Ismayilzada was also part of the team, but was excluded due to inactivity)
 
 The idea for the Project/Website was to Crete a todo List organiser in a form of a web app.<br>
