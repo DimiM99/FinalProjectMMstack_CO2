@@ -44,3 +44,8 @@ export async function allTasks(walletId, accessToken){
     const res = await axiosInstance.post("http://localhost:3001/getAllTasks", {walletId, accessToken})
     return res.data
 }
+
+export async function getListFromTask(walletId, accessToken, listId){
+    const res = await axiosInstance.post("http://localhost:3001/getListFromTaskId", {walletId, accessToken, listId})
+    return res.data
+}
