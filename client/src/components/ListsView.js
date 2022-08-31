@@ -17,7 +17,7 @@ import IconButton from '@mui/material/IconButton';
 
 
 export default function ListsView({selectedList, setSelectedList}) {
-    const {walletId, accessToken} = useUserStore();
+    const {walletId, accessToken, setUpcomingTasks} = useUserStore();
     const [selectedIndex, setSelectedIndex] = React.useState();
     const [lists, setLists] = React.useState([]);
     const [updated, setUpdated] = React.useState(true);
@@ -26,6 +26,16 @@ export default function ListsView({selectedList, setSelectedList}) {
     useEffect(() => {
         getAllLists(walletId, accessToken).then((data) => {
             setLists(data);
+            let temp = []
+            data.forEach(({data})=> {
+                if( data.length){
+                    temp = [...temp, ...data]
+                }
+            })
+            temp.sort((a,b) => {
+                return new Date(b.expirationTimestamp) - new Date(a.expirationTimestamp);
+            });
+            setUpcomingTasks(temp)
         });
     }, [updated, walletId, accessToken]);
 

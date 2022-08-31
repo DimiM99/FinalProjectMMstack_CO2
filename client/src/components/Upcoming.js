@@ -9,10 +9,11 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
+import useUserStore from "../store/user";
 
 const Upcoming = () => {
     const [checked, setChecked] = React.useState([0]);
-
+    const { upcomingTasks } = useUserStore()
     const handleToggle = (value) => () => {
         const currentIndex = checked.indexOf(value);
         const newChecked = [...checked];
@@ -31,32 +32,15 @@ const Upcoming = () => {
     <Box display="flex" alignItems="center" flexDirection="column">
         <Typography sx={{mt: 1, marginBottom: '10px'}} variant="h6">Upcoming</Typography>
         <List sx={{ width: '100%', backgroundgcolor: 'background.paper'}}>
-      {[0, 1, 2, 3].map((value) => {
-        const labelId = `checkbox-list-label-${value}`;
+      {upcomingTasks.map(({taskHeading, expirationTimestamp}) => {
 
         return (
           <ListItem
-            key={value}
-            secondaryAction={
-              <IconButton edge="end" aria-label="FileOpenIcon">
-                <FileOpenIcon />
-              </IconButton>
-            }
+
             disablePadding
             sx={{width: '100%'}}
           >
-            <ListItemButton onClick={handleToggle(value)} dense>
-              <ListItemIcon sx={{margin: 0, minWidth: '0'}}>
-                <Checkbox
-                  edge="start"
-                  checked={checked.indexOf(value) !== -1}
-                  tabIndex={-1}
-                  disableRipple
-                  inputProps={{ 'aria-labelledby': labelId }}
-                />
-              </ListItemIcon>
-              <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
-            </ListItemButton>
+              <ListItemText primary={`${taskHeading} | Due by: ${new Date(expirationTimestamp).toLocaleDateString("en-US")}`} />
           </ListItem>
         );
       })}

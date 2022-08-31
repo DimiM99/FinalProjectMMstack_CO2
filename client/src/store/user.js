@@ -6,6 +6,7 @@ const useUserStore = create((set,get) => ({
     username: "",
     accessToken: "",
     refreshToken: "",
+    upcomingTasks: [],
     updateAccessToken: async () =>{
         const { refreshToken } = get()
         const {data} = await axios.post('http://localhost:4000/token', {refreshToken}, configureRequestHeaders(refreshToken) )
@@ -15,6 +16,10 @@ const useUserStore = create((set,get) => ({
         return data.accessToken
     },
     setUser: ((walletId,  refreshToken, accessToken) => set({walletId,  refreshToken, accessToken})),
+    setUpcomingTasks: (upcomingTasks => {
+        console.log(upcomingTasks)
+        set({upcomingTasks})
+    }),
     setUsername: ((username) => set({username})),
     logoutRevocation: () => set({ walletId: "", accessToken: "", refreshToken: "" }),
 }))

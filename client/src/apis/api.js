@@ -27,6 +27,7 @@ export async function deleteTask(walletId, listObjectId, taskObjectId, accessTok
 
 export async function getAllLists(walletId, accessToken) {
     const res = await axiosInstance.post("http://localhost:3001/userlists", {walletId, accessToken})
+    console.log('sdaf',res)
     return res.data
 }
 

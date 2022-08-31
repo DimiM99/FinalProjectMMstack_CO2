@@ -28,9 +28,6 @@ export default function CreateNewListModal({open, setOpen, updated, setUpdated})
                     setUpdated(!updated)
                 }
             })
-
-        }else{
-            alert("Please fill in the form bevor submitting")
         }
     }
 
@@ -49,7 +46,7 @@ export default function CreateNewListModal({open, setOpen, updated, setUpdated})
                     autoFocus
                     margin="dense"
                     id="name"
-                    label="name"
+                    label="Name"
                     type="text"
                     fullWidth
                     variant="standard"
@@ -76,7 +73,7 @@ export default function CreateNewListModal({open, setOpen, updated, setUpdated})
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleCancel}>Cancel</Button>
-                <Button onClick={handleSubmit}>Create</Button>
+                <Button disabled={!name && !color} onClick={handleSubmit}>Create</Button>
             </DialogActions>
         </Dialog>
     );
